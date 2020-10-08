@@ -71,45 +71,32 @@ def play_one_move(col, row, valid_directions):
         victory = is_victory(col, row)
     return victory, col, row
 
-def pulling_levers(col, row, total, levers_list):
+def pulling_levers(col, row, total):
     answer = ""
 
     if col == 1 and row == 2:
-        for i in levers_list:
-            if i == 1:
-                answer = input("Pull a lever (y/n): ")
-                levers_list.remove(1)
+        answer = input("Pull a lever (y/n): ")
     elif col == 2 and row == 2:
-        for i in levers_list:
-            if i == 2:
-                answer = input("Pull a lever (y/n): ")
-                levers_list.remove(2)
+        answer = input("Pull a lever (y/n): ")
     elif col == 2 and row == 3:
-        for i in levers_list:
-            if i == 3:
-                answer = input("Pull a lever (y/n): ")
-                levers_list.remove(3)
+        answer = input("Pull a lever (y/n): ")
     elif col == 3 and row == 2:
-        for i in levers_list:
-            if i == 4:
-                answer = input("Pull a lever (y/n): ")
-                levers_list.remove(4)
+        answer = input("Pull a lever (y/n): ")
     answer = answer.lower()
     if answer == "y":
         total += 1
         print("You received 1 coin, your total is now {}.".format(total))
-    return total, levers_list
+    return total
 
 # The main program starts here
 victory = False
 row = 1
 col = 1
 total = 0
-levers_list = [1, 2, 3, 4]
 
 while not victory:
     valid_directions = find_directions(col, row)
     print_directions(valid_directions)
     victory, col, row = play_one_move(col, row, valid_directions)
-    total, levers_list = pulling_levers(col, row, total, levers_list)
-print("Victory!")
+    total = pulling_levers(col, row, total)
+print("Victory! Total coins {}.".format(total))
